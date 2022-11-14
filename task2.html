@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+
+<body>
+    <div id="container" class="container mt-5">
+        <div id="row" class="row row-cols-3">
+
+        </div>
+    </div>
+    <script>
+        let con = document.getElementById('container');
+        let row = document.getElementById('row');
+
+        fetch("https://api.tvmaze.com/shows")
+            .then((response) => response.json())
+            .then((data => {
+                for (i = 0; i < data.length; i++) {
+                    let div = document.createElement('div');
+                    div.innerHTML = `<div class="col card m-3" style="width: 18rem;">
+                    <img id="img" src="${data[i].image.original}" class="card-img-top" style ="height: 500px;" alt="...">
+                    <div class="card-body">
+                        <h5 id="title" class ="card-title">Type:${data[i].type}</h5>
+                        <p id="p" class="card-text">${data[i].name}</p>
+                        <a href="${data[i].url}" id="a" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>`
+                    row.appendChild(div)
+                }
+            }))
+
+
+    </script>
+
+
+</body>
+
+</html>
